@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
-    private List<TextComponent> compositeChildren = new ArrayList<TextComponent>();
+    private List<TextComponent> compositeChildren = new ArrayList<>();
 
     public TextComposite() {
     }
