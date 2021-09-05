@@ -1,5 +1,7 @@
 package com.epam.jwd.entity;
 
+import com.epam.jwd.entity.textComponentInstance.ComponentType;
+
 import java.util.Iterator;
 
 public interface TextComponent {
@@ -8,8 +10,6 @@ public interface TextComponent {
     void removeElement(TextComponent textComponent);
 
     TextComponent getElement(int id);
-
-    void parse();
 
     Iterator<TextComponent> getIterator();
 

@@ -12,6 +12,10 @@ public class TextLeaf implements TextComponent {
         this.str = str;
     }
 
+    public TextLeaf() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,10 +49,6 @@ public class TextLeaf implements TextComponent {
         return this;
     }
 
-    @Override
-    public void parse() {
-        throw new UnsupportedOperationException();
-    }
 
     @Override
     public Iterator<TextComponent> getIterator() {

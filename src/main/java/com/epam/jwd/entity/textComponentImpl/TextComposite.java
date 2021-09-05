@@ -31,10 +31,7 @@ public class TextComposite implements TextComponent {
         return compositeChildren.get(id);
     }
 
-    @Override
-    public void parse() {
 
-    }
 
     @Override
     public Iterator<TextComponent> getIterator() {

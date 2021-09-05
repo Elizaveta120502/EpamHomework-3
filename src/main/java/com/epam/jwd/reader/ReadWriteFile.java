@@ -7,7 +7,7 @@ import com.epam.jwd.logger.LoggerProvider;
 import java.io.*;
 
 public class ReadWriteFile {
-    private static final String NEW_LINE = "\n";
+    private static final String NEW_LINE_REGEX = "\n";
 
     private static ReadWriteFile readWriteFile;
 
@@ -28,7 +28,7 @@ public class ReadWriteFile {
             String str;
             while ((str = bufferedReader.readLine()) != null) {
                 stringBuilder.append(str);
-                stringBuilder.append(NEW_LINE);
+                stringBuilder.append(NEW_LINE_REGEX);
             }
         }catch (IOException e){
             throw new ReadDataException("Read from file was failed");
