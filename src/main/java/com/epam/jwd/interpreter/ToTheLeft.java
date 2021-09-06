@@ -1,6 +1,6 @@
 package com.epam.jwd.interpreter;
 
-public class ToTheLeft implements Expression{
+public class ToTheLeft implements Expression {
 
     private final int value;
     private final int amount;
@@ -11,7 +11,7 @@ public class ToTheLeft implements Expression{
     }
 
     @Override
-    public int interpret(int value,int secondValue) {
+    public int interpret(int value, int secondValue) {
         return value << amount;
     }
 }

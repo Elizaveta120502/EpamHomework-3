@@ -10,7 +10,7 @@ public class ToTheRight implements Expression {
     }
 
     @Override
-    public int interpret(int value,int amount) {
+    public int interpret(int value, int amount) {
         return value >> amount;
     }
 }

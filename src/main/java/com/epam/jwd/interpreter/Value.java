@@ -1,6 +1,6 @@
 package com.epam.jwd.interpreter;
 
-public class Value implements Expression{
+public class Value implements Expression {
 
     private final int baseValue;
 
@@ -9,7 +9,7 @@ public class Value implements Expression{
     }
 
     @Override
-    public int interpret(int value,int secondValue) {
+    public int interpret(int value, int secondValue) {
         return baseValue;
     }
 }

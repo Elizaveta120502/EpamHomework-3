@@ -18,7 +18,7 @@ public class TextComposite implements TextComponent {
 
     @Override
     public void addElement(TextComponent textComponent) {
-       compositeChildren.add(textComponent);
+        compositeChildren.add(textComponent);
     }
 
     @Override
@@ -30,7 +30,6 @@ public class TextComposite implements TextComponent {
     public TextComponent getElement(int id) {
         return compositeChildren.get(id);
     }
-
 
 
     @Override

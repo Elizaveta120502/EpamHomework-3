@@ -1,9 +1,8 @@
 package com.epam.jwd.interpreter;
 
-public class NOT implements Expression{
+public class NOT implements Expression {
 
     private final int value;
-
 
 
     public NOT(int value) {
@@ -11,7 +10,7 @@ public class NOT implements Expression{
     }
 
     @Override
-    public int interpret(int value,int secondValue) {
+    public int interpret(int value, int secondValue) {
         return ~value;
     }
 

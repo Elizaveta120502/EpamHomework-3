@@ -1,6 +1,6 @@
 package com.epam.jwd.interpreter;
 
-public class AND implements  Expression{
+public class AND implements Expression {
 
     private final int firstValue;
     private final int secondValue;
@@ -12,7 +12,7 @@ public class AND implements  Expression{
     }
 
     @Override
-    public int interpret(int value,int secondValue) {
+    public int interpret(int value, int secondValue) {
         return firstValue & secondValue;
     }
 }

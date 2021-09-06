@@ -31,7 +31,7 @@ public class TextLeaf implements TextComponent {
 
     @Override
     public String toString() {
-        return  str;
+        return str;
     }
 
     @Override

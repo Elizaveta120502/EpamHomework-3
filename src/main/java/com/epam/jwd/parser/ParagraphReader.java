@@ -3,7 +3,9 @@ package com.epam.jwd.parser;
 import com.epam.jwd.entity.TextComponent;
 import com.epam.jwd.entity.textComponentImpl.TextComposite;
 import com.epam.jwd.logger.LoggerProvider;
+import com.epam.jwd.reader.ReadWriteFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,8 @@ public class ParagraphReader extends BaseHandler {
         super();
     }
 
-    public ParagraphReader getInstance(){
-        if (paragraphReader == null){
+    public static ParagraphReader getInstance() {
+        if (paragraphReader == null) {
             paragraphReader = new ParagraphReader();
         }
         return paragraphReader;
@@ -26,17 +28,21 @@ public class ParagraphReader extends BaseHandler {
 
 
     @Override
-    public List<TextComponent> parse(String text) {
+    public List<TextComponent> parse(String text) throws IOException {
         LoggerProvider.getLOG().trace("Start parsing paragraph");
-        String [] paragraphs = text.split("\t");
-        List<TextComponent> paragraphList  = new ArrayList();
-        for (int i =0;i <paragraphs.length;i++){
+        ReadWriteFile.readFile(text);
+        String[] paragraphs = text.split("\t");
+        List<TextComponent> paragraphList = new ArrayList();
+        for (int i = 0; i < paragraphs.length; i++) {
             if (paragraphs[i].matches(PARAGRAPHE_REGEX)) {
                 paragraphs[i] = text.replaceAll("\t", "");
             }
+            else {
+                SentenceReader.getInstance().processingNext(text);
+            }
         }
 
-        for (String par : paragraphs){
+        for (String par : paragraphs) {
 
             paragraphList.add(new TextComposite(processingNext(par)));
         }
@@ -44,32 +50,13 @@ public class ParagraphReader extends BaseHandler {
         return paragraphList;
     }
 
+    public int getAmountOfSentences(List<TextComponent> sentencesAmount) {
+        int counter = 0;
+        for (int i = 0; i < sentencesAmount.size(); i++) {
+            counter++;
+        }
+        return counter;
+    }
 
 
-//    private TextComposite readParagraph(String path) throws IOException {
-//        List<TextComponent> paragraphList = new ArrayList<>();
-//        TextComposite textComposite = null;
-//        TextLeaf paragraphLeaf = null;
-//
-//        TextComponent textComponent = new TextComposite();
-//        try {
-//            File file = new File(path);
-//            FileReader fileReader = new FileReader(file);
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//            String paragraph;
-//
-//            while ((paragraph = bufferedReader.readLine()) != null) {
-//                if (paragraph.matches(PARAGRAPHE_REGEX) == true) {
-//
-//                    textComposite = new TextComposite(paragraphList);
-//                    textComposite.addElement(textComponent);
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            LoggerProvider.getLOG().error("The file to parse is not found");
-//        } catch (IOException e) {
-//            LoggerProvider.getLOG().error("An exception is thrown when trying to enter");
-//        }
-//        return textComposite;
-//    }
 }

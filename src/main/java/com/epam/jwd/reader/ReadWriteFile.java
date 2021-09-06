@@ -11,14 +11,14 @@ public class ReadWriteFile {
 
     private static ReadWriteFile readWriteFile;
 
-    public static ReadWriteFile getInstance(){
-        if (readWriteFile == null){
+    public static ReadWriteFile getInstance() {
+        if (readWriteFile == null) {
             readWriteFile = new ReadWriteFile();
         }
-        return  readWriteFile;
+        return readWriteFile;
     }
 
-    public String readFile(String fileName) throws IOException {
+    public static String readFile(String fileName) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         try {
 
@@ -30,20 +30,20 @@ public class ReadWriteFile {
                 stringBuilder.append(str);
                 stringBuilder.append(NEW_LINE_REGEX);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new ReadDataException("Read from file was failed");
         }
         LoggerProvider.getLOG().trace("Reading from file success");
-         return stringBuilder.toString();
+        return stringBuilder.toString();
     }
 
-    public void writeFile(String fileName,String text) throws IOException {
-        try{
+    public void writeFile(String fileName, String text) throws IOException {
+        try {
             PrintWriter printWriter = new PrintWriter(fileName);
             printWriter.print(text);
 
-        }catch(IOException e) {
-             throw new WriteDataException("Write was failed");
+        } catch (IOException e) {
+            throw new WriteDataException("Write was failed");
         }
         LoggerProvider.getLOG().trace("Writing to file success");
 

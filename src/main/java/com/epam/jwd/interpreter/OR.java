@@ -1,6 +1,6 @@
 package com.epam.jwd.interpreter;
 
-public class OR  implements Expression{
+public class OR implements Expression {
     private final int firstValue;
     private final int secondValue;
 
@@ -10,7 +10,7 @@ public class OR  implements Expression{
     }
 
     @Override
-    public int interpret(int firstValue,int secondValue) {
+    public int interpret(int firstValue, int secondValue) {
         return firstValue | secondValue;
     }
 }

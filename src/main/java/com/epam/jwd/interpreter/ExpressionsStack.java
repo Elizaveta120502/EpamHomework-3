@@ -1,45 +1,50 @@
 package com.epam.jwd.interpreter;
 
-import javax.print.attribute.IntegerSyntax;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 public class ExpressionsStack {
-    private static final String  BINARY_EXPRESSION_REGEX = "[0-9~&>{2}<{2}(\\^\\|]";
-    private static final String  WHITESPACE_REGEX = "\s";
+
+    private static final String WHITESPACE_REGEX = "\s";
 
 
-    private static int getResultOfBitOperation(String s,int firstValue ,int secondValue){
-        Stack<Expression> stack = new Stack<>();
-        s.replaceAll("",WHITESPACE_REGEX);
-        String[] tokenArray = s.split(WHITESPACE_REGEX);
-        List<Integer> numberArray = new ArrayList<>();
-        final Expression expression = null;
-
+    public static int getResultOfBitOperation(String s, int firstValue, int secondValue) {
+        int result = 0;
         Expression operator;
-        for (String str : tokenArray){
+
+        Stack<Expression> stack = new Stack<>();
+        List<Integer> numberArray = new ArrayList<>();
+
+        s.replaceAll("", WHITESPACE_REGEX);
+        String[] tokenArray = s.split(WHITESPACE_REGEX);
+
+        final Expression<Integer> expression;
+
+        for (String str : tokenArray) {
             do {
-                if (ExpressionUtils.isOperator(s)) {
+                if (ExpressionUtils.isOperator(str)) {
                     operator = stack.push(ExpressionUtils.getOperator(s, firstValue, secondValue));
 
                 }
-                if (ExpressionUtils.isOperand(s)) {
+                if (ExpressionUtils.isOperand(str)) {
 
-                    int operand = Integer.valueOf(s);
+                    int operand = Integer.valueOf(str);
                     numberArray.add(operand);
 
                 }
-            }while (numberArray.size() < 2);
-            operator = stack.pop();
-             (numberArray.get(0),numberArray.get(1)) -> {
+                operator = stack.pop();
+                result = operator.interpret(numberArray.get(0), numberArray.get(1));
 
-            }
-            int result =
-
+            } while (numberArray.size() < 2);
 
         }
-        return
+
+
+        return result;
     }
 
 }
+
+
