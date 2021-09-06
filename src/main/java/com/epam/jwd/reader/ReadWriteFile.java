@@ -20,21 +20,25 @@ public class ReadWriteFile {
 
     public static String readFile(String fileName) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
+        String wholeText = null;
+
         try {
 
             File file = new File(fileName);
+            LoggerProvider.getLOG().trace("File found");
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String str;
             while ((str = bufferedReader.readLine()) != null) {
                 stringBuilder.append(str);
-                stringBuilder.append(NEW_LINE_REGEX);
+               // stringBuilder.append("\n");
             }
         } catch (IOException e) {
             throw new ReadDataException("Read from file was failed");
         }
         LoggerProvider.getLOG().trace("Reading from file success");
-        return stringBuilder.toString();
+        wholeText = stringBuilder.toString();
+       return wholeText;
     }
 
     public void writeFile(String fileName, String text) throws IOException {

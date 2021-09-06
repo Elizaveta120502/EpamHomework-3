@@ -11,13 +11,25 @@ import java.util.List;
 
 public class ParagraphReader extends BaseHandler {
 
-    private static final String PARAGRAPHE_REGEX = "\\t(.+)\\p{Punct}";
+    private static final String PARAGRAPHE_REGEX = "(.+)\\p{Punct}";
     private static ParagraphReader paragraphReader;
+    String str;
 
 
-    private ParagraphReader() {
+    protected ParagraphReader() {
         super();
     }
+
+    @Override
+    protected List<TextComponent> processingNext(String str) throws IOException {
+
+        if (paragraphReader == null) {
+            paragraphReader = SentenceReader.getInstance();
+        }
+        return SentenceReader.getInstance().parse(str);
+    }
+
+
 
     public static ParagraphReader getInstance() {
         if (paragraphReader == null) {
@@ -29,24 +41,19 @@ public class ParagraphReader extends BaseHandler {
 
     @Override
     public List<TextComponent> parse(String text) throws IOException {
-        LoggerProvider.getLOG().trace("Start parsing paragraph");
-        ReadWriteFile.readFile(text);
-        String[] paragraphs = text.split("\t");
+         LoggerProvider.getLOG().trace("Start parsing paragraph");
+
+        str = ReadWriteFile.readFile(text);
+        String[] paragraphs = str.split("/");
         List<TextComponent> paragraphList = new ArrayList();
-        for (int i = 0; i < paragraphs.length; i++) {
-            if (paragraphs[i].matches(PARAGRAPHE_REGEX)) {
-                paragraphs[i] = text.replaceAll("\t", "");
-            }
-            else {
-                SentenceReader.getInstance().processingNext(text);
-            }
-        }
+        for (int i = 1; i < paragraphs.length; i++) {
+            paragraphs[i].replaceAll(" ","");
+                paragraphList.add(new TextComposite(processingNext(paragraphs[i])));
 
-        for (String par : paragraphs) {
 
-            paragraphList.add(new TextComposite(processingNext(par)));
         }
         LoggerProvider.getLOG().trace("Stop parsing paragraph");
+        //paragraphReader.processingNext(str);
         return paragraphList;
     }
 
@@ -57,6 +64,5 @@ public class ParagraphReader extends BaseHandler {
         }
         return counter;
     }
-
 
 }

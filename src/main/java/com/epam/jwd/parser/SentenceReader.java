@@ -10,18 +10,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SentenceReader extends BaseHandler {
+public class SentenceReader extends ParagraphReader {
 
-    private static final String SENTENCE_REGEX = "([\\w+|\\w+\\,\\-]\\s?)+[\\.|\\?|\\!]";
+    private static final String SENTENCE_REGEX = "[a-zA-Z0-9\\&\\<\\~\\^\\(\\)\\>\\— \\-\\s\\|\\,\\.\\']+[.!?]";
     private static final String SPLIT_SENTENCE_REGEX = "[.?!]+\\\\s?";
 
     private static SentenceReader sentenceReader;
 
-    private SentenceReader(BaseHandler nextComponent) {
-        super(nextComponent);
+    @Override
+    protected List<TextComponent> processingNext(String text) throws IOException {
+
+        if (sentenceReader == null) {
+            sentenceReader = WordReader.getInstance();
+        }
+        return  WordReader.getInstance().parse(text);
     }
 
-    private SentenceReader() {
+
+
+    public SentenceReader() {
+        super();
+
     }
 
     public static SentenceReader getInstance() {
@@ -34,20 +43,19 @@ public class SentenceReader extends BaseHandler {
     @Override
     public List<TextComponent> parse(String text) throws IOException {
         LoggerProvider.getLOG().trace("Start parsing sentences");
-        ReadWriteFile.readFile(text);
+
         String[] sentences = text.split(SPLIT_SENTENCE_REGEX);
         List<TextComponent> sentenceList = new ArrayList();
         for (int i = 0; i < sentences.length; i++) {
-            if (sentences[i].matches(SENTENCE_REGEX)) {
+           if (sentences[i].matches(SENTENCE_REGEX) == true) {
                 sentenceList.add(new TextComposite(processingNext(sentences[i])));
             }
-            else{
-                 WordReader.getInstance().processingNext(text);
-            }
 
-            LoggerProvider.getLOG().trace("Stop parsing sentences");
+
+
 
         }
+        LoggerProvider.getLOG().trace("Stop parsing sentences");
         return sentenceList;
     }
 
