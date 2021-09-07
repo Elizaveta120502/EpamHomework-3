@@ -46,13 +46,15 @@ public class WordReader extends SentenceReader {
         List<TextComponent> wordList = new ArrayList();
 
         for (int i = 0; i < words.length; i++) {
-            if (words[i].matches(WORD_REGEX)) {
-                wordList.add(new TextComposite(processingNext(words[i])));
-            }
-            else if ((words[i].matches(BINARY_EXPRESSION_REGEX))) {
+//            if (words[i].matches(WORD_REGEX)) {
+
+
+             if ((words[i].matches(BINARY_EXPRESSION_REGEX))) {
                 binaryOperations.add(words[i]);
 
-            }
+            }else {
+                 wordList.add(new TextComposite(processingNext(words[i])));
+             }
 
 
             LoggerProvider.getLOG().trace("Stop parsing words");

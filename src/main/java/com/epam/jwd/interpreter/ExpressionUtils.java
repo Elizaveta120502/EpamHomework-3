@@ -10,12 +10,12 @@ public class ExpressionUtils {
         }
     }
 
-    public static boolean isOperand(String s) {
+    public static int isOperand(String s) {
+        int operand =0;
         if (s.equals("\\d")) {
-            return true;
-        } else {
-            return false;
+             operand = Integer.valueOf(s);
         }
+        return operand;
     }
 
     public static Expression getOperator(String s, int firstValue, int secondValue) {

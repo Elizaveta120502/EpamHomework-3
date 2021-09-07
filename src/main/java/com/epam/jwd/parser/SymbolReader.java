@@ -14,7 +14,7 @@ import java.util.List;
 public class SymbolReader extends WordReader {
 
     private static final String SYMBOL_REGEX = "[^\\s+]";
-
+    private static final String BINARY_EXPRESSION_REGEX = "[0-9~&>{2}<{2}(\\^\\|]";
 
     private static SymbolReader symbolReader;
 

@@ -1,6 +1,10 @@
 package com.epam.jwd.interpreter;
 
 
+import com.epam.jwd.parser.SymbolReader;
+import com.epam.jwd.reader.ReadWriteFile;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -10,34 +14,30 @@ public class ExpressionsStack {
     private static final String WHITESPACE_REGEX = "\s";
 
 
-    public static int getResultOfBitOperation(String s, int firstValue, int secondValue) {
+    public static int getResultOfBitOperation(String text) throws IOException {
         int result = 0;
-        Expression operator;
-
+        Expression operator = null;
         Stack<Expression> stack = new Stack<>();
         List<Integer> numberArray = new ArrayList<>();
+        SymbolReader.getInstance().parse(text);
 
-        s.replaceAll("", WHITESPACE_REGEX);
-        String[] tokenArray = s.split(WHITESPACE_REGEX);
+        String[] tokenArray = text.split(WHITESPACE_REGEX);
 
         final Expression<Integer> expression;
 
         for (String str : tokenArray) {
+          //  str.replaceAll("", WHITESPACE_REGEX);
             do {
                 if (ExpressionUtils.isOperator(str)) {
-                    operator = stack.push(ExpressionUtils.getOperator(s, firstValue, secondValue));
-
+                    operator = stack.push(ExpressionUtils.getOperator(str,
+                            ExpressionUtils.isOperand(str),
+                            ExpressionUtils.isOperand(str)));
                 }
-                if (ExpressionUtils.isOperand(str)) {
 
-                    int operand = Integer.valueOf(str);
-                    numberArray.add(operand);
-
-                }
                 operator = stack.pop();
                 result = operator.interpret(numberArray.get(0), numberArray.get(1));
 
-            } while (numberArray.size() < 2);
+            } while (numberArray.size() < 100);
 
         }
 

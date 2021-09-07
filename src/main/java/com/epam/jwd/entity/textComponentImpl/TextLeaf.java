@@ -3,6 +3,7 @@ package com.epam.jwd.entity.textComponentImpl;
 import com.epam.jwd.entity.TextComponent;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 public class TextLeaf implements TextComponent {
@@ -54,4 +55,16 @@ public class TextLeaf implements TextComponent {
     public Iterator<TextComponent> getIterator() {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public List<TextComponent> getAll() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int getId() {
+        throw new UnsupportedOperationException();
+    }
+
+
 }

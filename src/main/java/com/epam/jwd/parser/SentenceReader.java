@@ -12,8 +12,9 @@ import java.util.List;
 
 public class SentenceReader extends ParagraphReader {
 
-    private static final String SENTENCE_REGEX = "[a-zA-Z0-9\\&\\<\\~\\^\\(\\)\\>\\— \\-\\s\\|\\,\\.\\']+[.!?]";
-    private static final String SPLIT_SENTENCE_REGEX = "[.?!]+\\\\s?";
+    private static final String SENTENCE_REGEX = "([A-Z][^\\.!?]*[\\.!?])";
+    private static final String SPLIT_SENTENCE_REGEX = "[.?!]+\s?";
+    private static String str;
 
     private static SentenceReader sentenceReader;
 
@@ -28,7 +29,7 @@ public class SentenceReader extends ParagraphReader {
 
 
 
-    public SentenceReader() {
+    protected SentenceReader() {
         super();
 
     }
@@ -47,9 +48,9 @@ public class SentenceReader extends ParagraphReader {
         String[] sentences = text.split(SPLIT_SENTENCE_REGEX);
         List<TextComponent> sentenceList = new ArrayList();
         for (int i = 0; i < sentences.length; i++) {
-           if (sentences[i].matches(SENTENCE_REGEX) == true) {
+          // if (sentences[i].matches(SENTENCE_REGEX) == true) {
                 sentenceList.add(new TextComposite(processingNext(sentences[i])));
-            }
+         //  }
 
 
 

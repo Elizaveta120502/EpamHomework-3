@@ -9,11 +9,13 @@ import java.util.List;
 public class TextComposite implements TextComponent {
     private List<TextComponent> compositeChildren = new ArrayList<>();
 
+
     public TextComposite() {
     }
 
     public TextComposite(List<TextComponent> compositeChildren) {
         this.compositeChildren = compositeChildren;
+
     }
 
     @Override
@@ -36,4 +38,16 @@ public class TextComposite implements TextComponent {
     public Iterator<TextComponent> getIterator() {
         return compositeChildren.iterator();
     }
+
+    @Override
+    public List<TextComponent> getAll(){
+        return compositeChildren;
+    }
+
+    @Override
+    public int getId() {
+        return compositeChildren.indexOf(compositeChildren);
+    }
+
+
 }
