@@ -1,7 +1,7 @@
 package com.epam.jwd.interpreter;
 
 
-import java.util.*;
+import java.util.ArrayDeque;
 
 public class ExpressionsStack {
 
@@ -14,7 +14,7 @@ public class ExpressionsStack {
         return contextValues.pop();
     }
 
-    public void pushValue(Integer value){
+    public void pushValue(Integer value) {
         contextValues.push(value);
     }
 }

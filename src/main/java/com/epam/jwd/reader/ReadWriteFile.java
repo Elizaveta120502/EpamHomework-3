@@ -31,14 +31,14 @@ public class ReadWriteFile {
             String str;
             while ((str = bufferedReader.readLine()) != null) {
                 stringBuilder.append(str);
-               // stringBuilder.append("\n");
+                // stringBuilder.append("\n");
             }
         } catch (IOException e) {
             throw new ReadDataException("Read from file was failed");
         }
         LoggerProvider.getLOG().trace("Reading from file success");
         wholeText = stringBuilder.toString();
-       return wholeText;
+        return wholeText;
     }
 
     public void writeFile(String fileName, String text) throws IOException {

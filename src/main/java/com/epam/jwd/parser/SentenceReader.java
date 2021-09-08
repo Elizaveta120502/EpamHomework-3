@@ -4,7 +4,6 @@ package com.epam.jwd.parser;
 import com.epam.jwd.entity.TextComponent;
 import com.epam.jwd.entity.textComponentImpl.TextComposite;
 import com.epam.jwd.logger.LoggerProvider;
-import com.epam.jwd.reader.ReadWriteFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,9 +23,8 @@ public class SentenceReader extends ParagraphReader {
         if (sentenceReader == null) {
             sentenceReader = WordReader.getInstance();
         }
-        return  WordReader.getInstance().parse(text);
+        return WordReader.getInstance().parse(text);
     }
-
 
 
     protected SentenceReader() {
@@ -48,11 +46,9 @@ public class SentenceReader extends ParagraphReader {
         String[] sentences = text.split(SPLIT_SENTENCE_REGEX);
         List<TextComponent> sentenceList = new ArrayList();
         for (int i = 0; i < sentences.length; i++) {
-          // if (sentences[i].matches(SENTENCE_REGEX) == true) {
-                sentenceList.add(new TextComposite(processingNext(sentences[i])));
-         //  }
-
-
+            // if (sentences[i].matches(SENTENCE_REGEX) == true) {
+            sentenceList.add(new TextComposite(processingNext(sentences[i])));
+            //  }
 
 
         }

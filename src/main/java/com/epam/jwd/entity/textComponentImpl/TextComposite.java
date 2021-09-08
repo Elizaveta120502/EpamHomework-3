@@ -40,7 +40,7 @@ public class TextComposite implements TextComponent {
     }
 
     @Override
-    public List<TextComponent> getAll(){
+    public List<TextComponent> getAll() {
         return compositeChildren;
     }
 

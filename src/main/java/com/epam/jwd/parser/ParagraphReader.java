@@ -30,7 +30,6 @@ public class ParagraphReader extends BaseHandler {
     }
 
 
-
     public static ParagraphReader getInstance() {
         if (paragraphReader == null) {
             paragraphReader = new ParagraphReader();
@@ -41,14 +40,14 @@ public class ParagraphReader extends BaseHandler {
 
     @Override
     public List<TextComponent> parse(String text) throws IOException {
-          LoggerProvider.getLOG().trace("Start parsing paragraph");
+        LoggerProvider.getLOG().trace("Start parsing paragraph");
 
         str = ReadWriteFile.readFile(text);
         String[] paragraphs = str.split("/");
         List<TextComponent> paragraphList = new ArrayList();
         for (int i = 1; i < paragraphs.length; i++) {
-           // paragraphs[i].replaceAll(" ","");
-                paragraphList.add(new TextComposite(processingNext(paragraphs[i])));
+            // paragraphs[i].replaceAll(" ","");
+            paragraphList.add(new TextComposite(processingNext(paragraphs[i])));
 
 
         }
@@ -61,7 +60,7 @@ public class ParagraphReader extends BaseHandler {
         int counter = 0;
 
 
-                counter = sentencesAmount;
+        counter = sentencesAmount;
 
         return counter;
     }

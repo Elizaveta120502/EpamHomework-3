@@ -3,9 +3,7 @@ package com.epam.jwd.parser;
 
 import com.epam.jwd.entity.TextComponent;
 import com.epam.jwd.entity.textComponentImpl.TextLeaf;
-import com.epam.jwd.interpreter.ExpressionsStack;
 import com.epam.jwd.logger.LoggerProvider;
-import com.epam.jwd.reader.ReadWriteFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ public class SymbolReader extends WordReader {
     private static final String BINARY_EXPRESSION_REGEX = "[0-9~&>{2}<{2}(\\^\\|]";
 
     private static SymbolReader symbolReader;
-
 
 
     private SymbolReader() {

@@ -2,7 +2,6 @@ package com.epam.jwd.sort;
 
 import com.epam.jwd.entity.TextComponent;
 import com.epam.jwd.entity.textComponentImpl.TextComposite;
-import com.epam.jwd.parser.ParagraphReader;
 import com.epam.jwd.parser.SentenceReader;
 
 import java.io.IOException;

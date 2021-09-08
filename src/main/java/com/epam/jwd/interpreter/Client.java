@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Client {
     private ArrayList<Expression> listExpression;
     private static Client client;
-    private String expr;
+    private static String expr;
 
     public static Client getInstance(String expr) {
         if (client == null) {
@@ -29,43 +29,45 @@ public class Client {
                 continue;
             }
 
-                switch (lexeme) {
-                    case ">":
-                        listExpression.add(new ToTheRight());
-                        break;
-                    case "<":
-                        listExpression.add(new ToTheLeft());
-                        break;
+            switch (lexeme) {
+                case ">":
+                    listExpression.add(new ToTheRight());
+                    break;
+                case "<":
+                    listExpression.add(new ToTheLeft());
+                    break;
 
-                    case "&":
-                        listExpression.add(new AND());
-                        break;
+                case "&":
+                    listExpression.add(new AND());
+                    break;
 
-                    case "|":
-                        listExpression.add(new OR());
-                        break;
+                case "|":
+                    listExpression.add(new OR());
+                    break;
 
-                    case "~":
-                        listExpression.add(new NOT());
-                        break;
+                case "~":
+                    listExpression.add(new NOT());
+                    break;
 
-                    case "^":
-                        listExpression.add(new XOR());
-                        break;
+                case "^":
+                    listExpression.add(new XOR());
+                    break;
 
-                    default:
-                        Scanner scan = new Scanner(lexeme);
-                        if (scan.hasNextInt()) {
-                            listExpression.add(new Value(Integer.parseInt(lexeme)));
+                default:
+                    Scanner scan = new Scanner(lexeme);
+                    if (scan.hasNextInt()) {
+                        listExpression.add(new Value(Integer.parseInt(lexeme)));
 
-                        }
+                    }
 
-                }
+            }
 
         }
+
+
     }
 
-    public Number calculate(){
+    public Number calculate() {
         ExpressionsStack context = new ExpressionsStack();
         for (Expression terminal : listExpression) {
             terminal.interpret(context);
